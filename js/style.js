@@ -13,16 +13,7 @@ function landscape(){
     $('#page-portrait').css({"width":w,"height":h});
     $('#page-landscape').show();
     $('#page-portrait').hide();
-    if(firstInit){
-        init();
-        firstInit = false;
-    }
-    var canvas = document.getElementById("canvas");
-    //var ih = w/1.608;
-    $('#box').css({'width':w,'height':h});
-    $('#animation_container').css({'width':w,'height':h});
-    $('#canvas').css({'width':w,'height':h});
-    $('#dom_overlay_container').css({'width':w,'height':h});
+
 }
 
 var firstInit = true;
@@ -39,6 +30,37 @@ function portrait02(){
     $('#page-portrait').css({"width":w,"height":h});
     $('#page-landscape').hide();
     $('#page-portrait').show();
+    var canvas = document.getElementById("canvas");
+    //var ih = w/1.608;
+    $('#box').css({'width':w,'height':h});
+    $('#animation_container').css({'width':w,'height':h});
+    $('#canvas').css({'width':w,'height':h});
+    $('#dom_overlay_container').css({'width':w,'height':h});
+    //初始化加载
+    if(firstInit){
+        var imgFile = [
+            './images/awrasf.png',
+            './images/sesg.png'
+        ];
+        ImgLoadingByFile(imgFile,'loadingPage','img-loading-txt','readyGo','musicStar');
+        init();
+        firstInit = false;
+    }
+    //音乐
+    $(".open").click(function(){
+        musicStar.pause();
+        $(this).css("display","none");
+        $(".clock").css("display","block");
+        //$('.btn-music').removeClass('open-music');
+    });
+    $(".clock").click(function(){
+        musicStar.play();
+        $(this).css("display","none");
+        $(".open").css("display","block");
+        //$('.btn-music').addClass('open-music');
+    });
+    //$('#page-portrait').hide();
+    //$('#box').css({'width':w,'height':h});
 
 }
 (function() {
@@ -166,18 +188,30 @@ function init() {
     canvas = document.getElementById("canvas");
     anim_container = document.getElementById("animation_container");
     dom_overlay_container = document.getElementById("dom_overlay_container");
-    handleComplete();
+    images = images||{};
+    var loader = new createjs.LoadQueue(false);
+    loader.addEventListener("fileload", handleFileLoad);
+    loader.addEventListener("complete", handleComplete);
+    loader.loadManifest(lib.properties.manifest);
 }
-function handleComplete() {
+function handleFileLoad(evt) {
+    if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+}
+function handleComplete(evt) {
     //This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
-    exportRoot = new lib.demo01();
+    var queue = evt.target;
+    var ssMetadata = lib.ssMetadata;
+    for(i=0; i<ssMetadata.length; i++) {
+        ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+    }
+    exportRoot = new lib.QCDQ();
     stage = new createjs.Stage(canvas);
     stage.addChild(exportRoot);
     //Registers the "tick" event listener.
     fnStartAnimation = function() {
         createjs.Ticker.setFPS(lib.properties.fps);
         createjs.Ticker.addEventListener("tick", stage);
-    };
+    }
     //Code to support hidpi screens and responsive scaling.
     function makeResponsive(isResp, respDim, isScale, scaleType) {
         var lastW, lastH, lastS=1;

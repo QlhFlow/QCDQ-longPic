@@ -2,20 +2,69 @@
 @import "reset";
 body{
   overflow: hidden;
+  position: relative;
 }
-.box {
+//loading
+.load-page{
   width:100%;
   height:100%;
   position: absolute;
-  background:pink;
   left:0;
   top:0;
-  #animation_container{
+  z-index: 999;
+  background-color:#fff;
+  .img-load-now{
+    width:142/75rem;
+    height:200/75rem;
     position: absolute;
-    left:0;
-    top:0;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    text-align: center;
+    .loading{
+      background-image:url(../img/loading.gif);
+      background-size: 142/75rem 143/75rem;
+      width:142/75rem;
+      height:143/75rem;
+      margin-bottom: 20/75rem;
+    }
+    span{
+      font-size: 22/75rem;
+    }
+    .readyGo{
+      display: none;
+      text-align: center;
+    }
   }
 }
+
+
+/**音乐播放**/
+.btn-music{width: 66/75rem; height: 66/75rem;background:rgba(0,0,0,0.3);border-radius:50%;position: absolute; top:36/75rem; right: 36/75rem;z-index: 999;}
+//.open-music{animation: music-btn 3s linear infinite; -webkit-animation: music-btn 3s linear infinite;}
+.music{width:100%; height: 100%;}
+@-webkit-keyframes music-btn{
+  form{
+    -webkit-transform: rotateZ(0deg);
+    transform:rotateZ(0deg);
+  }
+  to{
+    -webkit-transform: rotateZ(360deg);
+    transform:rotateZ(360deg);
+  }
+}
+@keyframes music-btn{
+  form{
+    -webkit-transform: rotateZ(0deg);
+    transform:rotateZ(0deg);
+  }
+  to{
+    -webkit-transform: rotateZ(360deg);
+    transform:rotateZ(360deg);
+  }
+}
+
 
 //横屏
 .page-landscape{
@@ -23,18 +72,48 @@ body{
   position: absolute;
   left:0;
   top:0;
+  width:100%;
+  height:100%;
+  h3{
+    text-align: center;
+    margin: 0 auto;
+    font-size: 28/75rem;
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+  }
 }
 
 //竖屏
 .page-portrait{
-  display:none;
+  display:block;
   position: absolute;
   left:0;
   top:0;
-  vertical-align: middle;
-  h3{
-    text-align: center;
-    margin: 0 auto;
+  width:100%;
+  height:100%;
+  .load-page{
+    position: absolute;
+    left:0;
+    top:0;
+    z-index: 999;
   }
+  .box {
+    width:100%;
+    height:100%;
+    position: absolute;
+    background:pink;
+    left:0;
+    top:0;
+    #animation_container{
+      position: absolute;
+      left:0;
+      top:0;
+    }
+  }
+
+
 }
 

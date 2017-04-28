@@ -2,35 +2,36 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>汽车大全-长图</title>
+		<meta name="description" content="汽车大全-长图描述" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,shrink-to-fit=no">
     	<meta content="yes" name="apple-mobile-web-app-capable">
     	<meta content="black" name="apple-mobile-web-app-status-bar-style">
     	<meta content="telephone=no" name="format-detection">
-    	<meta name="authoring-tool" content="Adobe_Animate_CC">
+		<meta name="msapplication-tap-highlight" content="no">
 		<link rel="stylesheet" href="css/style.css"/>
 	</head>
-	<style>
-		  #animation_container {
-			/*position:absolute;*/
-			/*margin:auto;*/
-			/*left:0;right:0;*/
-			/*top:0;bottom:0;*/
-		  }
-	</style>
 	<script>
-		document.addEventListener("WeixinJSBridgeReady", function () {
-			audioAutoPlay('musicStar');
-		}, false);
+//		document.addEventListener("WeixinJSBridgeReady", function () {
+//			audioAutoPlay('musicStar');
+//		}, false);
 	</script>
 
 	<body>
-	<!--竖屏-->
-	<div class="page-portrait" id="page-portrait">
-		<h3>横屏体验更佳！</h3>
-	</div>
 	<!--横屏-->
 	<div id="page-landscape" class="page-landscape">
+		<h3>横屏体验更佳！</h3>
+	</div>
+	<!--竖屏-->
+	<div class="page-portrait" id="page-portrait">
+        <div class="load-page" id="loadingPage">
+            <div class="img-load-now">
+                <!--加载动画-->
+                <div class="loading"></div>
+                <div class="mask"><span id="img-loading-txt"></span></div>
+                <div class="readyGo" id="readyGo">GO</div>
+            </div>
+        </div>
 		<div class="box" id="box">
 			<div id="animation_container" style="background-color:rgba(255, 255, 255, 1.00); width:550px; height:400px;">
 				<canvas id="canvas" width="550" height="400" style="position: absolute; display: block; background-color:rgba(255, 255, 255, 1.00);"></canvas>
@@ -38,11 +39,28 @@
 				</div>
 			</div>
 		</div>
+        <div class="btn-music open-music">
+            <img src="img/music-open.png" class="open music" style="display: block;"/>
+            <img src="img/music-close.png" class="clock music" style="display: none;"/>
+        </div>
 	</div>
+    <!--音乐-->
+    <audio src="video/startmusic.mp3" id="musicStar"  loop="loop" preload="auto" ></audio>
 	</body>
 	<script src="js/jquery-1.8.3.min.js"></script>
 	<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
 	<script src="js/demo01.js"></script>
 	<script src="js/init.js"></script>
 	<script src="js/style.js"></script>
+	<script>
+//		function audioAutoPlay(id){
+//			var audio = document.getElementById(id),
+//					play = function(){
+//						audio.play();
+//						document.removeEventListener("touchstart",play, false);
+//					};
+//			audio.play();
+//			document.addEventListener("touchstart",play, false);
+//		}
+	</script>
 </html>
