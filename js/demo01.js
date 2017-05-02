@@ -428,14 +428,14 @@ p.nominalBounds = new cjs.Rectangle(0,0,428.7,303.2);
 			var nowTime = new Date().getTime();
 
 			var v = (nowY - lastMoveStart) / (nowTime - lastMoveTime); //最后一段时间手指划动速度
-			console.log(v,nowTime);
+			//console.log(v,nowTime);
 			stopInertiaMove = false;
 			(function(v, startTime, contentY) {
 				var dir = v > 0 ? -1 : 1; //加速度方向
 				var deceleration = dir*0.0006;
 				var duration = v / deceleration; // 速度消减至0所需时间
-				var dist = v * duration / 2; //最终移动多少
-				console.log(dist);
+				var dist = v * duration / 1.8; //最终移动多少
+				//console.log(dist);
 				function inertiaMove() {
 					if(stopInertiaMove) return;
 					//var nowTime = Event.timeStamp || Date.now();
